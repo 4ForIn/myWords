@@ -13,7 +13,7 @@ For example the My exercise section probably will not be done.
 
 The reason I have used many packages is only to learn more.
 The project includes:
-redux, firebase, sqlFlite, google_sign_in, and others.
+redux, firebase, sqlfLite, google_sign_in, and others.
 
 ## Getting Started
 

@@ -8,9 +8,6 @@ part 'word.g.dart';
 
 @freezed
 abstract class WordModel with _$WordModel {
-  //String category, date, en, id, pl, tr;
-  //int isFavorite;
-
   const factory WordModel(
       {String category,
       String date,
