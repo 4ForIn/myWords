@@ -15,15 +15,13 @@ The reason I have used many packages is only to learn more.
 The project includes:
 redux, firebase, sqlfLite, google_sign_in, and others.
 
-## Getting Started
+## Type of project
 
-This project is a starting point for a Flutter application.
+This project is not commercial.
 
-A few resources to get you started if this is your first Flutter project:
+## Content from other creators:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+userAvatar icon made by bqlqn from www.flaticon.com
+<a href="https://www.flaticon.com/free-icon/user_2948062" title="bqlqn">bqlqn</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Some ideas get from different developers on youtube and github.
