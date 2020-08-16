@@ -16,14 +16,18 @@ class _$UserTearOff {
   const _$UserTearOff();
 
 // ignore: unused_element
-  _User call(String email, String name, String password, String userImageUrl,
-      String uid) {
+  _User call(
+      {String email,
+      String name,
+      String password,
+      String userImageUrl,
+      String uid}) {
     return _User(
-      email,
-      name,
-      password,
-      userImageUrl,
-      uid,
+      email: email,
+      name: name,
+      password: password,
+      userImageUrl: userImageUrl,
+      uid: uid,
     );
   }
 }
@@ -109,11 +113,13 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object uid = freezed,
   }) {
     return _then(_User(
-      email == freezed ? _value.email : email as String,
-      name == freezed ? _value.name : name as String,
-      password == freezed ? _value.password : password as String,
-      userImageUrl == freezed ? _value.userImageUrl : userImageUrl as String,
-      uid == freezed ? _value.uid : uid as String,
+      email: email == freezed ? _value.email : email as String,
+      name: name == freezed ? _value.name : name as String,
+      password: password == freezed ? _value.password : password as String,
+      userImageUrl: userImageUrl == freezed
+          ? _value.userImageUrl
+          : userImageUrl as String,
+      uid: uid == freezed ? _value.uid : uid as String,
     ));
   }
 }
@@ -121,12 +127,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_User with DiagnosticableTreeMixin implements _User {
   const _$_User(
-      this.email, this.name, this.password, this.userImageUrl, this.uid)
-      : assert(email != null),
-        assert(name != null),
-        assert(password != null),
-        assert(userImageUrl != null),
-        assert(uid != null);
+      {this.email, this.name, this.password, this.userImageUrl, this.uid});
 
   factory _$_User.fromJson(Map<String, dynamic> json) =>
       _$_$_UserFromJson(json);
@@ -197,8 +198,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 }
 
 abstract class _User implements User {
-  const factory _User(String email, String name, String password,
-      String userImageUrl, String uid) = _$_User;
+  const factory _User(
+      {String email,
+      String name,
+      String password,
+      String userImageUrl,
+      String uid}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 

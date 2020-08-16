@@ -43,10 +43,7 @@ class SizeConfig {
     widthMultiplier = _blockWidth.toDouble();
 
     // ignore: avoid_print
-    print('_blockWidth: $_blockWidth');
-    // ignore: avoid_print
-    print('blockHeight: $_blockHeight');
-    // ignore: avoid_print
-    print('constraints.maxHeight: $constraints');
+    print(
+        'w: $widthMultiplier|h: $heightMultiplier |constraints.maxH: $constraints');
   }
 }
