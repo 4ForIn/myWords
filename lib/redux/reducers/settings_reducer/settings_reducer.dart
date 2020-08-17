@@ -3,9 +3,9 @@ import 'package:my_words/redux/actions/actions.dart';
 import 'package:redux/redux.dart';
 
 Reducer<AppSettings> settingsReducer = combineReducers<AppSettings>([
-  TypedReducer<AppSettings, FakeAction>(fakeReducer),
+  TypedReducer<AppSettings, FakeAction>(_fakeReducer),
 ]);
 
-AppSettings fakeReducer(AppSettings appSettings, FakeAction action) {
+AppSettings _fakeReducer(AppSettings appSettings, FakeAction action) {
   return appSettings;
 }

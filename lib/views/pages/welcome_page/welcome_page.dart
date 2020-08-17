@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_words/config/config.dart';
+import 'package:my_words/views/pages/pages.dart';
 import 'package:my_words/views/widgets/menus/popup_menu_button_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -76,7 +77,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           Navigator.of(context).push(MaterialPageRoute<WidgetBuilder>(
             //MaterialPageRoute<Null>
             builder: (BuildContext context) {
-              return null;
+              return CounterPage();
 
               ///TODO: add_new_word_page
             },

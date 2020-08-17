@@ -3,9 +3,9 @@ import 'package:my_words/redux/actions/actions.dart';
 import 'package:redux/redux.dart';
 
 Reducer<User> userReducer = combineReducers<User>([
-  TypedReducer<User, FakeAction>(fakeReducer),
+  TypedReducer<User, Fake2Action>(_fakeReducer),
 ]);
 
-User fakeReducer(User currentUser, FakeAction action) {
+User _fakeReducer(User currentUser, Fake2Action action) {
   return currentUser;
 }

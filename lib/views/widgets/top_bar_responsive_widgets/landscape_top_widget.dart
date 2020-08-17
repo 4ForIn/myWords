@@ -93,18 +93,15 @@ typedef ViewModelFn = Function();
 
 class _ViewModel {
   final ViewModelFn getDataFomDb;
-  final ViewModelFn logOut;
 
   _ViewModel({
     this.getDataFomDb,
-    this.logOut,
   });
 
   // ignore: prefer_constructors_over_static_methods
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(
       getDataFomDb: () => store.dispatch(FakeAction),
-      logOut: () => store.dispatch(FakeAction),
     );
   }
 }

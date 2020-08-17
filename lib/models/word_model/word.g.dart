@@ -6,7 +6,6 @@ part of 'word.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: non_constant_identifier_names
 _$_WordModel _$_$_WordModelFromJson(Map<String, dynamic> json) {
   return _$_WordModel(
     category: json['category'] as String,
@@ -19,7 +18,6 @@ _$_WordModel _$_$_WordModelFromJson(Map<String, dynamic> json) {
   );
 }
 
-// ignore: non_constant_identifier_names
 Map<String, dynamic> _$_$_WordModelToJson(_$_WordModel instance) =>
     <String, dynamic>{
       'category': instance.category,

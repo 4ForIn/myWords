@@ -15,7 +15,7 @@ class AppState {
 
   AppState.initialState()
       : currentUser = const User(),
-        wordsList = [], // dummysWords
+        wordsList = [const WordModel()], // dummysWords
         appSettings = const AppSettings(
             isDarkMode: 'false',
             selectLanguageRadioListGrVal: AppStrings.en,
