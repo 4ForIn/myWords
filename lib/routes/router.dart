@@ -6,6 +6,7 @@ import 'package:my_words/views/pages/pages.dart';
     // initial route is named "/"
     MaterialRoute<dynamic>(page: WelcomeScreen, initial: true),
     MaterialRoute<dynamic>(page: CounterPage, fullscreenDialog: true),
+    MaterialRoute<dynamic>(page: LoginPage),
   ],
 )
 class $Router {}

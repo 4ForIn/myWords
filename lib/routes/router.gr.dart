@@ -14,9 +14,11 @@ import '../views/pages/pages.dart';
 class Routes {
   static const String welcomeScreen = '/';
   static const String counterPage = '/counter-page';
+  static const String loginPage = '/login-page';
   static const all = <String>{
     welcomeScreen,
     counterPage,
+    loginPage,
   };
 }
 
@@ -26,6 +28,7 @@ class Router extends RouterBase {
   final _routes = <RouteDef>[
     RouteDef(Routes.welcomeScreen, page: WelcomeScreen),
     RouteDef(Routes.counterPage, page: CounterPage),
+    RouteDef(Routes.loginPage, page: LoginPage),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -41,6 +44,12 @@ class Router extends RouterBase {
         builder: (context) => CounterPage(),
         settings: data,
         fullscreenDialog: true,
+      );
+    },
+    LoginPage: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => const LoginPage(),
+        settings: data,
       );
     },
   };

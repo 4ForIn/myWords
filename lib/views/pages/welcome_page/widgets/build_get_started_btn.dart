@@ -12,7 +12,7 @@ class BuildGetStartedBtnWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        ExtendedNavigator.of(context).push('/counter-page');
+        ExtendedNavigator.of(context).push('/login-page');
       },
       child: Align(
         alignment: Alignment.bottomCenter,
