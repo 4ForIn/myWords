@@ -18,10 +18,12 @@ class _$AppSettingsTearOff {
 // ignore: unused_element
   _AppSettings call(
       {String isDarkMode,
+      String loginPageState,
       String selectLanguageRadioListGrVal,
       String selectedTab}) {
     return _AppSettings(
       isDarkMode: isDarkMode,
+      loginPageState: loginPageState,
       selectLanguageRadioListGrVal: selectLanguageRadioListGrVal,
       selectedTab: selectedTab,
     );
@@ -33,6 +35,7 @@ const $AppSettings = _$AppSettingsTearOff();
 
 mixin _$AppSettings {
   String get isDarkMode;
+  String get loginPageState;
   String get selectLanguageRadioListGrVal;
   String get selectedTab;
 
@@ -46,6 +49,7 @@ abstract class $AppSettingsCopyWith<$Res> {
       _$AppSettingsCopyWithImpl<$Res>;
   $Res call(
       {String isDarkMode,
+      String loginPageState,
       String selectLanguageRadioListGrVal,
       String selectedTab});
 }
@@ -60,12 +64,16 @@ class _$AppSettingsCopyWithImpl<$Res> implements $AppSettingsCopyWith<$Res> {
   @override
   $Res call({
     Object isDarkMode = freezed,
+    Object loginPageState = freezed,
     Object selectLanguageRadioListGrVal = freezed,
     Object selectedTab = freezed,
   }) {
     return _then(_value.copyWith(
       isDarkMode:
           isDarkMode == freezed ? _value.isDarkMode : isDarkMode as String,
+      loginPageState: loginPageState == freezed
+          ? _value.loginPageState
+          : loginPageState as String,
       selectLanguageRadioListGrVal: selectLanguageRadioListGrVal == freezed
           ? _value.selectLanguageRadioListGrVal
           : selectLanguageRadioListGrVal as String,
@@ -83,6 +91,7 @@ abstract class _$AppSettingsCopyWith<$Res>
   @override
   $Res call(
       {String isDarkMode,
+      String loginPageState,
       String selectLanguageRadioListGrVal,
       String selectedTab});
 }
@@ -99,12 +108,16 @@ class __$AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
   @override
   $Res call({
     Object isDarkMode = freezed,
+    Object loginPageState = freezed,
     Object selectLanguageRadioListGrVal = freezed,
     Object selectedTab = freezed,
   }) {
     return _then(_AppSettings(
       isDarkMode:
           isDarkMode == freezed ? _value.isDarkMode : isDarkMode as String,
+      loginPageState: loginPageState == freezed
+          ? _value.loginPageState
+          : loginPageState as String,
       selectLanguageRadioListGrVal: selectLanguageRadioListGrVal == freezed
           ? _value.selectLanguageRadioListGrVal
           : selectLanguageRadioListGrVal as String,
@@ -117,7 +130,10 @@ class __$AppSettingsCopyWithImpl<$Res> extends _$AppSettingsCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
   const _$_AppSettings(
-      {this.isDarkMode, this.selectLanguageRadioListGrVal, this.selectedTab});
+      {this.isDarkMode,
+      this.loginPageState,
+      this.selectLanguageRadioListGrVal,
+      this.selectedTab});
 
   factory _$_AppSettings.fromJson(Map<String, dynamic> json) =>
       _$_$_AppSettingsFromJson(json);
@@ -125,13 +141,15 @@ class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
   @override
   final String isDarkMode;
   @override
+  final String loginPageState;
+  @override
   final String selectLanguageRadioListGrVal;
   @override
   final String selectedTab;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppSettings(isDarkMode: $isDarkMode, selectLanguageRadioListGrVal: $selectLanguageRadioListGrVal, selectedTab: $selectedTab)';
+    return 'AppSettings(isDarkMode: $isDarkMode, loginPageState: $loginPageState, selectLanguageRadioListGrVal: $selectLanguageRadioListGrVal, selectedTab: $selectedTab)';
   }
 
   @override
@@ -140,6 +158,7 @@ class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
     properties
       ..add(DiagnosticsProperty('type', 'AppSettings'))
       ..add(DiagnosticsProperty('isDarkMode', isDarkMode))
+      ..add(DiagnosticsProperty('loginPageState', loginPageState))
       ..add(DiagnosticsProperty(
           'selectLanguageRadioListGrVal', selectLanguageRadioListGrVal))
       ..add(DiagnosticsProperty('selectedTab', selectedTab));
@@ -152,6 +171,9 @@ class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
             (identical(other.isDarkMode, isDarkMode) ||
                 const DeepCollectionEquality()
                     .equals(other.isDarkMode, isDarkMode)) &&
+            (identical(other.loginPageState, loginPageState) ||
+                const DeepCollectionEquality()
+                    .equals(other.loginPageState, loginPageState)) &&
             (identical(other.selectLanguageRadioListGrVal,
                     selectLanguageRadioListGrVal) ||
                 const DeepCollectionEquality().equals(
@@ -166,6 +188,7 @@ class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(isDarkMode) ^
+      const DeepCollectionEquality().hash(loginPageState) ^
       const DeepCollectionEquality().hash(selectLanguageRadioListGrVal) ^
       const DeepCollectionEquality().hash(selectedTab);
 
@@ -182,6 +205,7 @@ class _$_AppSettings with DiagnosticableTreeMixin implements _AppSettings {
 abstract class _AppSettings implements AppSettings {
   const factory _AppSettings(
       {String isDarkMode,
+      String loginPageState,
       String selectLanguageRadioListGrVal,
       String selectedTab}) = _$_AppSettings;
 
@@ -190,6 +214,8 @@ abstract class _AppSettings implements AppSettings {
 
   @override
   String get isDarkMode;
+  @override
+  String get loginPageState;
   @override
   String get selectLanguageRadioListGrVal;
   @override

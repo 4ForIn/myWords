@@ -11,6 +11,7 @@ abstract class AppSettings with _$AppSettings {
 
   const factory AppSettings(
       {String isDarkMode,
+      String loginPageState,
       String selectLanguageRadioListGrVal,
       String selectedTab}) = _AppSettings;
 

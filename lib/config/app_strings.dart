@@ -20,11 +20,12 @@ class AppStrings {
   static const String newEnWord = 'Type the word in english: ';
   static const String newPlWord = 'Type the word in polish: ';
   static const String newTrWord = 'Type the word in turkish: ';
-  static const String signUptxt = 'SIGN UP';
+  static const String signUpCapital = 'SIGN UP';
   static const String noAccount = "You Don't have an account?";
   static const String orLogin = 'or login with';
   static const String loginCapital = 'LOG IN';
   static const String forgotPass = 'Forgot Password?';
+  static const String strongPass = 'Enter a strong password';
   static const String en = 'en';
   static const String pl = 'pl';
   static const String tr = 'tr';
@@ -46,12 +47,13 @@ class AppStrings {
   static const String lightMode = 'Light mode';
   static const String darkMode = 'Dark mode';
   static const String welcomeScr = '/';
-  static const String homeScr = '/home';
-  static const String signInScr = '/signin';
-  static const String signUpScr = '/signup';
+  static const String homeScr = '/home-page';
+  static const String logInScr = '/login-page';
+  static const String resetScr = '/reset-page';
+  static const String signUpScr = '/signup-page';
   static const String addNewScr = '/addNew';
-  //static const String signUptxt = 'SIGN UP';
-  //static const String signUptxt = 'SIGN UP';
+
+  //static const String forgotPass = 'Forgot Password?';
   //static const String signUptxt = 'SIGN UP';
   //static const String signUptxt = 'SIGN UP';
   //static const String signUptxt = 'SIGN UP';

@@ -18,6 +18,7 @@ class AppState {
         wordsList = [const WordModel()], // dummysWords
         appSettings = const AppSettings(
             isDarkMode: 'false',
+            loginPageState: AppStrings.logInScr,
             selectLanguageRadioListGrVal: AppStrings.en,
             selectedTab: AppStrings.wordsTab);
 

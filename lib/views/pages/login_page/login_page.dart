@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -22,9 +21,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>(); // form key, added to the form
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController _controller = TextEditingController();
 
-  // ignore: unused_field
-  String _email, _password; // variables for use in form
+  // ignore: unused_field, prefer_final_fields
+  String _email,
+      // ignore: unused_field, prefer_final_fields
+      _password,
+      // ignore: unused_field, prefer_final_fields
+      _name,
+      _emailValidationInfo = 'Email address',
+      _passwordValidationInfo = 'Password'; // variables for use in form
   bool _isObscured = true;
 
   //Color _eyeButtonColor = Colors.grey;
@@ -36,9 +42,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ViewModel>(
-      converter: (Store<AppState> store) => _ViewModel.fromStore(store),
-      builder: (BuildContext context, _ViewModel vm) => Scaffold(
+    return StoreConnector<AppState, _LoginPageViewModel>(
+      converter: (Store<AppState> store) =>
+          _LoginPageViewModel.fromStore(store),
+      onDispose: (store) => store.dispatch(LoginPageSetLoginAction()),
+      builder: (BuildContext context, _LoginPageViewModel vm) => Scaffold(
         key: _scaffoldKey,
         // backgroundColor: AppTheme.mainBackgroundColor,
         appBar: AppBar(
@@ -55,53 +63,76 @@ class _LoginPageState extends State<LoginPage> {
                 3.2 * SizeConfig.heightMultiplier), //(22.0, 0.0, 22.0, 22.0)
             children: <Widget>[
               SizedBox(
-                  height: 3.5 * SizeConfig.heightMultiplier), //kToolbarHeight
-              const BuildTitle(),
+                  height: 2 * SizeConfig.heightMultiplier), //kToolbarHeight
+              BuildTitle(
+                pageState: vm.loginPageState,
+              ),
               const BuildTitleLine(),
               SizedBox(
-                height: 5 * SizeConfig.heightMultiplier, //70.0,
+                height: 4.3 * SizeConfig.heightMultiplier, //70.0,
               ),
-              buildEmailTextField(),
+              if (vm.loginPageState == AppStrings.signUpScr)
+                buildNameTextField(),
               SizedBox(
                 height: 4.3 * SizeConfig.heightMultiplier, //30
               ),
-              buildPasswordInput(context),
-              buildResetPasswordText(),
+              buildEmailTextField(vm),
+              SizedBox(
+                height: 4.3 * SizeConfig.heightMultiplier, //30
+              ),
+              buildPasswordInput(context, vm),
+              if (vm.loginPageState == AppStrings.signUpScr)
+                BuildPassSubtitle(
+                  onTapRecognizer: () {},
+                  text: AppStrings.strongPass,
+                ),
+
+              if (vm.loginPageState == AppStrings.logInScr)
+                BuildPassSubtitle(
+                  onTapRecognizer: resetPasswordFn1(),
+                  text: AppStrings.forgotPass,
+                ),
               SizedBox(
                 height: 5.5 * SizeConfig.heightMultiplier, //60
               ),
-              //buildLoginButton(context),
+
               BuildBtn(
                 onPressed: () {},
-                text: 'log in',
+                text: vm.loginPageState == AppStrings.signUpScr
+                    ? AppStrings.signUpCapital
+                    : AppStrings.loginCapital,
               ),
               SizedBox(
                 height: 4.3 * SizeConfig.heightMultiplier,
               ),
-              //buildOrText(),
-              const BuildLoginWith(),
+
+              if (vm.loginPageState == AppStrings.logInScr)
+                const BuildLoginWith(),
+
               SizedBox(
                 height: 2.1 * SizeConfig.heightMultiplier, //16
               ),
-              Row(
-                // wyśrodkowanie w poziomie
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  BuilSocialMediaBtn(
-                    context: context,
-                    icon: MdiIcons.google,
-                    iconColor: Colors.blue,
-                    onPressed: () {},
-                  ),
-                  // codPoint: 983725
-                  //GroovinMaterialIcons.google
-                  SizedBox(
-                    width: 4.5 * SizeConfig.widthMultiplier, //16
-                  ),
-                ],
-              ),
+              if (vm.loginPageState == AppStrings.logInScr)
+                Row(
+                  // horizontaly in the middle
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    BuilSocialMediaBtn(
+                      context: context,
+                      icon: MdiIcons.google, // codPoint: 983725
+                      iconColor: Colors.blue,
+                      onPressed: () {},
+                    ),
+                    SizedBox(
+                      width: 4.5 * SizeConfig.widthMultiplier, //16
+                    ),
+                  ],
+                ),
               SizedBox(height: 7 * SizeConfig.heightMultiplier), // 70
-              buildSignUpText(),
+              if (vm.loginPageState == AppStrings.logInScr)
+                BuildSignUpTxt(
+                  onTapRecognizer: vm.setSignupState,
+                ),
             ],
           ),
         ),
@@ -111,15 +142,21 @@ class _LoginPageState extends State<LoginPage> {
 
   /// Building methods:
 
-  TextFormField buildEmailTextField() {
+  TextFormField buildNameTextField() {
     return TextFormField(
-      onChanged: (emailInput) {
-        setState(() {
-          _email = emailInput;
-          //print('_email: $_email; emailInput: $emailInput.');
-        });
-      },
+      onSaved: (nameInput) => _name = nameInput,
+      validator: (nameInput) => nameValidationHandling(nameInput),
+      decoration: const InputDecoration(labelText: 'Name'),
+      cursorColor: Colors.black, // label
+    );
+  }
+
+  TextFormField buildEmailTextField(_LoginPageViewModel vm) {
+    return TextFormField(
+      controller: _controller,
       keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(labelText: _emailValidationInfo),
+      onChanged: (emailInput) => emailOnChangeHandling(emailInput),
       onSaved: (emailInput) => _email = emailInput,
       // ignore: missing_return
       validator: (emailInput) {
@@ -127,23 +164,21 @@ class _LoginPageState extends State<LoginPage> {
           return 'Please type an email';
         }
       },
-      decoration: const InputDecoration(labelText: 'Email Address'), // label
     );
   }
 
-  TextFormField buildPasswordInput(BuildContext context) {
+  TextFormField buildPasswordInput(
+      BuildContext context, _LoginPageViewModel vm) {
     return TextFormField(
+      cursorColor: Colors.black,
+      obscureText: _isObscured,
       keyboardType: TextInputType.visiblePassword,
       onSaved: (passwordInput) => _password = passwordInput,
-      validator: (passwordInput) {
-        if (passwordInput.isNotEmpty) {
-          return null;
-        } else {
-          return 'Please type a password';
-        }
-      },
+      onChanged: (passwordInput) => passwordOnChangeHandling(passwordInput),
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: vm.loginPageState == AppStrings.signUpScr
+            ? _passwordValidationInfo
+            : 'Password',
         // icon at the right sight of password input
         suffixIcon: IconButton(
           onPressed: () {
@@ -152,53 +187,86 @@ class _LoginPageState extends State<LoginPage> {
             });
           },
           icon: Icon(
-            // eye icon
             Icons.remove_red_eye,
             color: _isObscured ? Colors.grey : Theme.of(context).primaryColor,
           ),
         ),
       ),
-      obscureText: _isObscured,
     );
   }
 
-  Padding buildResetPasswordText() {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: Align(
-        alignment: Alignment.centerRight,
-        child: RichText(
-          text: TextSpan(
-            text: 'Forgot Password?',
-            style: Theme.of(context)
-                .textTheme
-                .subtitle2
-                .copyWith(fontSize: 3 * SizeConfig.widthMultiplier),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () => resetPasswordFn(context),
-          ),
-        ),
-      ),
-    );
+  /// Name field walidation:
+
+  String nameValidationHandling(String nameInput) {
+    if (nameInput.isEmpty || nameInput.length <= 1) {
+      return 'Please type Your name';
+    } else {
+      return null;
+    }
   }
 
-  Align buildSignUpText() {
-    return Align(
-      child: RichText(
-        text: TextSpan(
-          text: "You Don't have an account?",
-          style: const TextStyle(fontSize: 12.0, color: Colors.grey),
-          children: <TextSpan>[
-            TextSpan(
-              text: ' SIGN UP',
-              style: Theme.of(context).textTheme.subtitle2,
-              recognizer: TapGestureRecognizer()..onTap = signUpOnTapFn,
-            ),
-            //style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14.0, color: Colors.black),),
-          ],
-        ),
-      ),
-    );
+  /// Email field walidation:
+
+  bool isEmailValid(String email) {
+    if (email != null) {
+      if (email.length < 5 ||
+          !email.contains('@') ||
+          !email.contains('.') ||
+          email.contains(',')) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  String emailValidationHandling(String emailInput) {
+    if (isEmailValid(emailInput)) {
+      return 'Please type a valid email address';
+    } else {
+      return null;
+    }
+  }
+
+  void emailOnChangeHandling(String emailInput) {
+    if (!isEmailValid(emailInput) && emailInput.isNotEmpty) {
+      setState(() {
+        _emailValidationInfo = 'Email is not valid';
+      });
+    } else {
+      setState(() {
+        _emailValidationInfo = 'Email address';
+        _email = emailInput;
+      });
+    }
+  }
+
+  /// Password field walidation:
+
+  String passwordValidationHandling(String passwordInput) {
+    if (passwordInput.isEmpty || passwordInput.length < 5) {
+      return 'Please type a valid password!';
+    } else {
+      return null;
+    }
+  }
+
+  void passwordOnChangeHandling(String password) {
+    if (password.isEmpty) {
+      setState(() {
+        _passwordValidationInfo = 'Please enter a password';
+      });
+    } else if (password.length < 6) {
+      setState(() {
+        _passwordValidationInfo = 'Password is not strong!';
+      });
+    } else {
+      setState(() {
+        _passwordValidationInfo = 'Password';
+      });
+    }
   }
 
   /// Handling log in and sign up with Firebase:
@@ -226,16 +294,16 @@ class _LoginPageState extends State<LoginPage> {
 //        MaterialPageRoute(builder: (BuildContext context) => SignUpScreen()));
   }
 
-  void notAvailableMethod(BuildContext ctx, IconData icon) {}
+  //void notAvailableMethod(BuildContext ctx, IconData icon) {}
 
-  dynamic resetPasswordFn(BuildContext context) async {
-    if (_email == null ||
-        _email.length < 3 ||
-        !_email.contains('@') ||
-        !_email.contains('.') ||
-        _email.contains(',')) {
+  VoidCallback resetPasswordFn1() {
+    return () => resetPasswordFn2();
+  }
+
+  Future resetPasswordFn2() async {
+    if (!isEmailValid(_email)) {
       CustomDialogAlert.buildDialog(
-        context: context,
+        context: _scaffoldKey.currentContext,
         title: 'Error: password not reseted',
         content: 'Please type valid email',
         onPressedFn: () =>
@@ -243,6 +311,12 @@ class _LoginPageState extends State<LoginPage> {
       );
     } else {
       try {
+        CustomDialogAlert.buildDialog(
+          context: context,
+          title: 'Reset password',
+          content: 'Email was sent to $_email',
+          onPressedFn: () => Navigator.pop(context),
+        );
         /* FirebaseAuth auth = FirebaseAuth.instance;
         await auth.sendPasswordResetEmail(email: _email).whenComplete(
               () => CustomDialogAlert.buildDialog(
@@ -266,18 +340,26 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-class _ViewModel {
+class _LoginPageViewModel {
   //final UserModel user;
-  final Function loginAndGetUser;
+  String loginPageState;
+  final Function setForgotPassState;
+  final Function setLoginState;
+  final VoidCallback setSignupState;
 
-  _ViewModel({
-    this.loginAndGetUser,
-  });
+  _LoginPageViewModel(
+      {this.loginPageState,
+      this.setForgotPassState,
+      this.setLoginState,
+      this.setSignupState});
 
   // ignore: prefer_constructors_over_static_methods
-  static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(
-      loginAndGetUser: () => store.dispatch(FakeAction),
+  static _LoginPageViewModel fromStore(Store<AppState> store) {
+    return _LoginPageViewModel(
+      loginPageState: store.state.appSettings.loginPageState,
+      setForgotPassState: () => store.dispatch(LoginPageSetForgotPassAction()),
+      setLoginState: () => store.dispatch(LoginPageSetLoginAction()),
+      setSignupState: () => store.dispatch(LoginPageSetSignupAction()),
     );
   }
 }
