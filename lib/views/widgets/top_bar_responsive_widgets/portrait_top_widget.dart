@@ -4,8 +4,7 @@ import 'package:my_words/config/config.dart';
 import 'package:my_words/models/models.dart';
 import 'package:my_words/redux/actions/actions.dart';
 import 'package:my_words/views/widgets/menus/popup_menu_button_widget.dart';
-import 'package:my_words/views/widgets/profile_image.dart';
-import 'package:my_words/views/widgets/search_field_widget.dart';
+import 'package:my_words/views/widgets/profile_image_widget.dart';
 import 'package:redux/redux.dart';
 
 class TopContainerPortrait extends StatelessWidget {
@@ -18,9 +17,9 @@ class TopContainerPortrait extends StatelessWidget {
         alignment: Alignment.topCenter,
         child: Container(
           padding: EdgeInsets.only(top: 2.0 * SizeConfig.heightMultiplier),
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(24.0),
+              bottom: Radius.circular(3.5 * SizeConfig.heightMultiplier), // 24
             ),
             color: AppTheme.topBarBackgroundColor,
           ),
@@ -29,8 +28,8 @@ class TopContainerPortrait extends StatelessWidget {
             children: <Widget>[
               Expanded(
                 child: Container(
-                  // ProfilImage gets padding from left and from up
-                  //Icons.blur_on gets padding from right and from up
+                  // ProfilImage padding from left and from up
+                  //PopUpMenuButtonWidget padding from right and from up
                   padding: EdgeInsets.all(2 * SizeConfig.heightMultiplier),
                   width: double.maxFinite, //?
                   child: Column(
@@ -39,32 +38,12 @@ class TopContainerPortrait extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             ProfileImage(),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 1 * SizeConfig.heightMultiplier,
-                                ),
-                                child: Text(
-                                  AppStrings.homeScreenHi,
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ),
-                            ),
+                            buildHiText(context),
                             const PopUpMenuButtonWidget(),
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            AppStrings.whatLearn,
-                            style: Theme.of(context)
-                                .textTheme
-                                .headline3
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
+                      buildTopBarText(context),
                     ],
                   ),
                 ),
@@ -76,9 +55,37 @@ class TopContainerPortrait extends StatelessWidget {
     );
   }
 
+  Expanded buildTopBarText(BuildContext context) {
+    return Expanded(
+      child: Center(
+        child: Text(
+          AppStrings.whatLearn,
+          style: Theme.of(context)
+              .textTheme
+              .headline3
+              .copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
+  Expanded buildHiText(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 1 * SizeConfig.heightMultiplier,
+        ),
+        child: Text(
+          AppStrings.homeScreenHi,
+          style: Theme.of(context).textTheme.headline4,
+        ),
+      ),
+    );
+  }
+
   ///------------------------------------------------------------------
 
-  Expanded buildSearchField() {
+  /* Expanded buildSearchField() {
     return Expanded(
       flex: 7,
       child: Container(
@@ -93,7 +100,7 @@ class TopContainerPortrait extends StatelessWidget {
         child: const SearchFieldWidget(),
       ),
     );
-  }
+  } */
 }
 
 typedef ViewModelFn = Function();

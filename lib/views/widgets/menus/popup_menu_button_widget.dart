@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -32,35 +33,39 @@ class PopUpMenuButtonWidget extends StatelessWidget {
           },
         ).toList();
       },
-      onSelected: (menuData) => {
-        if (menuData.iconPath == '/addNew' || menuData.iconPath == '/home')
-          {Navigator.of(context).pushNamed(menuData.iconPath)}
-        else if (menuData.iconPath == '/logout')
-          {
-            StoreProvider.of<AppState>(context).dispatch(FakeAction),
-            // ignore: avoid_print
-            print('dispatch(FakeAction)'),
-          }
-        else
-          // ignore: avoid_print
-          {print('some fn')}
-      },
+      onSelected: (menuData) => onSelectFn(menuData, context),
     );
+  }
+
+  Set<Set<void>> onSelectFn(_MenuItems menuData, BuildContext context) {
+    return {
+      if (menuData.path == '/addNew' || menuData.path == '/counter-page')
+        {ExtendedNavigator.of(context).push(menuData.path)}
+      else if (menuData.path == '/logout')
+        {
+          StoreProvider.of<AppState>(context).dispatch(FakeAction),
+          // ignore: avoid_print
+          print('dispatch(FakeAction)'),
+        }
+      else
+        // ignore: avoid_print
+        {print('some fn')}
+    };
   }
 }
 
 class _MenuItems {
-  const _MenuItems({this.title, this.icon, this.iconPath});
+  const _MenuItems({this.title, this.icon, this.path});
 
   final String title;
   final IconData icon;
-  final String iconPath;
+  final String path;
 }
 
 const List<_MenuItems> _menuData = <_MenuItems>[
-  _MenuItems(title: ' Light mode', icon: Icons.wb_sunny, iconPath: ''),
-  _MenuItems(title: ' Dark mode', icon: Icons.brightness_3, iconPath: ''),
-  _MenuItems(title: ' Add word', icon: Icons.add, iconPath: '/addNew'),
-  _MenuItems(title: ' Log out', icon: MdiIcons.logout, iconPath: '/logout'),
-  _MenuItems(title: ' Home', icon: Icons.home, iconPath: '/home'),
+  _MenuItems(title: ' Light mode', icon: Icons.wb_sunny, path: ''),
+  _MenuItems(title: ' Dark mode', icon: Icons.brightness_3, path: ''),
+  _MenuItems(title: ' Add word', icon: Icons.add, path: '/addNew'),
+  _MenuItems(title: ' Log out', icon: MdiIcons.logout, path: '/counter-page'),
+  _MenuItems(title: ' Home', icon: Icons.home, path: '/home'),
 ];

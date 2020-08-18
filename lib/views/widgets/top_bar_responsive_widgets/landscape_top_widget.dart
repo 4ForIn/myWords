@@ -4,7 +4,7 @@ import 'package:my_words/config/config.dart';
 import 'package:my_words/models/models.dart';
 import 'package:my_words/redux/actions/actions.dart';
 import 'package:my_words/views/widgets/menus/popup_menu_button_widget.dart';
-import 'package:my_words/views/widgets/profile_image.dart';
+import 'package:my_words/views/widgets/profile_image_widget.dart';
 import 'package:redux/redux.dart';
 
 class TopContainerLandscape extends StatelessWidget {
@@ -14,7 +14,7 @@ class TopContainerLandscape extends StatelessWidget {
       converter: (Store<AppState> store) => _ViewModel.fromStore(store),
       builder: (BuildContext context, _ViewModel vm) => FractionallySizedBox(
         heightFactor: 0.78,
-        //without this alignment it wont start from every top
+        //without this alignment it wont start from very top
         alignment: Alignment.topCenter,
         child: Container(
           decoration: const BoxDecoration(
@@ -40,17 +40,7 @@ class TopContainerLandscape extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             ProfileImage(),
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 1 * SizeConfig.heightMultiplier,
-                                ),
-                                child: Text(
-                                  AppStrings.homeScreenHi,
-                                  style: Theme.of(context).textTheme.headline4,
-                                ),
-                              ),
-                            ),
+                            buildHiText(context),
                           ],
                         ),
                       ),
@@ -60,19 +50,10 @@ class TopContainerLandscape extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.only(
                           bottom: 0.5 * SizeConfig.heightMultiplier,
-                          right: 1 * SizeConfig.widthMultiplier,
+                          right: 2 * SizeConfig.widthMultiplier,
                           //left: 20 * SizeConfig.widthMultiplier,
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          //crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Text(
-                              AppStrings.whatLearn,
-                              style: Theme.of(context).textTheme.headline3,
-                            ),
-                          ],
-                        ),
+                        child: buildTopBarText(context),
                       ),
                     ),
                   ],
@@ -83,6 +64,33 @@ class TopContainerLandscape extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Row buildTopBarText(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      //crossAxisAlignment: CrossAxisAlignment.end,
+      children: <Widget>[
+        Text(
+          AppStrings.whatLearn,
+          style: Theme.of(context).textTheme.headline3,
+        ),
+      ],
+    );
+  }
+
+  Expanded buildHiText(BuildContext context) {
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 1 * SizeConfig.heightMultiplier,
+        ),
+        child: Text(
+          AppStrings.homeScreenHi,
+          style: Theme.of(context).textTheme.headline4,
         ),
       ),
     );

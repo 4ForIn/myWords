@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_words/config/config.dart';
 import 'package:my_words/views/pages/pages.dart';
+import 'package:my_words/views/pages/welcome_page/widgets/welcome_page_widgets.dart';
 import 'package:my_words/views/widgets/menus/popup_menu_button_widget.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -54,19 +55,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   child: Column(
                     //mainAxisSize: MainAxisSize.max,
                     //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      buildWelcomeTitle(context),
-                      //Expanded flex: 1
-                      buildWelcomeImage(),
-                      //Expanded flex: 3
-                      buildWelcomeSubtitle(context),
-                      //Expanded flex: 1
+                    children: const <Widget>[
+                      BuildTitleWidget(),
+                      BuildWelcomeImageWidget(),
+                      BuildSubtitleWidget(),
                     ],
                   ),
-                ), //Image.asset(Images.welcomeImage),
+                ),
               ),
             ),
-            buildStartBtn(context),
+            const BuildGetStartedBtnWidget(),
           ],
         ),
       ),
@@ -78,8 +76,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             //MaterialPageRoute<Null>
             builder: (BuildContext context) {
               return CounterPage();
-
-              ///TODO: add_new_word_page
             },
             fullscreenDialog: true,
           ));
@@ -102,117 +98,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         'Welcome',
         style: Theme.of(context).textTheme.headline6,
       ),
-      // ignore: prefer_const_literals_to_create_immutables
       actions: <Widget>[
-        const PopUpMenuButtonWidget(),
+        Padding(
+          padding: EdgeInsets.only(right: 3.56 * SizeConfig.widthMultiplier),
+          child: const PopUpMenuButtonWidget(),
+        ),
       ],
-    );
-  }
-
-  Expanded buildWelcomeTitle(BuildContext context) {
-    return Expanded(
-        child: Padding(
-      padding: const EdgeInsets.only(top: 12),
-      //top: 12,(0.5 * SizeConfig.heightMultiplier).toDouble())
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: FittedBox(
-          child: Text(
-            AppStrings.homeScreenReady,
-            style: Theme.of(context)
-                .textTheme
-                .subtitle2
-                .copyWith(fontSize: 22), //2.7 *SizeConfig.heightMultiplier
-
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    ));
-  }
-
-  Expanded buildWelcomeImage() {
-    return Expanded(
-      flex: 3,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 12), // vertical: 12;
-        child: Image.asset(
-          Images.welcomeImage,
-          fit: BoxFit.fill,
-        ),
-      ),
-    );
-  }
-
-  Expanded buildWelcomeSubtitle(BuildContext context) {
-    return Expanded(
-        child: Align(
-      alignment: Alignment.topCenter,
-      child: FittedBox(
-        //surrounding Text() into FittedBox fixing an issue that in landscape orientation
-        // the subtitle`s last rows are not visible.
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 1 * SizeConfig.heightMultiplier),
-          child: Text(
-            AppStrings.welcomeScreenSubtitle,
-            style: Theme.of(context).textTheme.subtitle2,
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    ));
-  }
-
-  InkWell buildStartBtn(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push<WidgetBuilder>(
-          context,
-          MaterialPageRoute(
-            builder: (context) => null,
-            fullscreenDialog: true,
-          ),
-        );
-        //Navigator.pushNamed(context, '/login');
-      },
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          // constraints is used instead of a padding padding: EdgeInsets.symmetric(vertical: )
-          constraints: BoxConstraints(
-              minHeight: 5.8 * SizeConfig.heightMultiplier,
-              //5.8 * SizeConfig.heightMultiplier
-              maxHeight: 7.5 * SizeConfig.heightMultiplier), // 7.5 *
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(2.7 * SizeConfig.heightMultiplier),
-            ),
-            color: AppTheme.topBarBackgroundColor,
-          ),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                child: Icon(
-                  Icons.chevron_left,
-                  size: 8 * SizeConfig.imageSizeMultiplier,
-                  color: Colors.white,
-                ),
-              ),
-              Text(
-                AppStrings.startBtn,
-                style: Theme.of(context).textTheme.button,
-              ),
-              Expanded(
-                child: Icon(
-                  Icons.chevron_right,
-                  size: 8 * SizeConfig.imageSizeMultiplier,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
