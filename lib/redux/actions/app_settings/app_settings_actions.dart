@@ -1,5 +1,7 @@
-class LoginPageSetLoginAction {}
+class SetLoggedUserAction {}
 
-class LoginPageSetSignupAction {}
+class NoLoggedUserAction {}
 
-class LoginPageSetForgotPassAction {}
+class DarkModeOnAction {}
+
+class DarkModeOffAction {}

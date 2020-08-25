@@ -7,13 +7,12 @@ part 'app_settings.g.dart';
 
 @freezed
 abstract class AppSettings with _$AppSettings {
-  //String isDarkMode, selectedLanguageRadioListGrVal, selectedTab;
+  //String isDarkMode,
 
-  const factory AppSettings(
-      {String isDarkMode,
-      String loginPageState,
-      String selectLanguageRadioListGrVal,
-      String selectedTab}) = _AppSettings;
+  const factory AppSettings({
+    String isDarkMode,
+    bool isLoggedInUser,
+  }) = _AppSettings;
 
   factory AppSettings.fromJson(Map<String, dynamic> json) =>
       _$AppSettingsFromJson(json);

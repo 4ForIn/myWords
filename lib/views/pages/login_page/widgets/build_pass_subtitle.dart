@@ -5,9 +5,15 @@ import 'package:my_words/config/config.dart';
 class BuildPassSubtitle extends StatelessWidget {
   final VoidCallback onTapRecognizer;
   final String text;
+  //final String email;
+  final BuildContext context;
+  final GlobalKey<ScaffoldState> scaffoldKey;
   const BuildPassSubtitle({
     this.onTapRecognizer,
     this.text,
+    this.context,
+    //this.email,
+    this.scaffoldKey,
     Key key,
   }) : super(key: key);
 

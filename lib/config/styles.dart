@@ -46,7 +46,7 @@ class AppTheme {
   );
 
   static final TextStyle _titleLight = TextStyle(
-    color: Colors.white,
+    color: Colors.black,
     fontSize: 2.5 * SizeConfig.textMultiplier, // 2* 7.6 = 15
   );
 

@@ -48,7 +48,7 @@ class Router extends RouterBase {
     },
     LoginPage: (data) {
       return MaterialPageRoute<dynamic>(
-        builder: (context) => const LoginPage(),
+        builder: (context) => LoginPage(),
         settings: data,
       );
     },
