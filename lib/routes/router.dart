@@ -4,9 +4,10 @@ import 'package:my_words/views/pages/pages.dart';
 @MaterialAutoRouter(
   routes: <AutoRoute>[
     // initial route is named "/"
+    MaterialRoute<dynamic>(page: AddWordPage, fullscreenDialog: true),
+    MaterialRoute<dynamic>(page: HomePage),
+    MaterialRoute<dynamic>(page: LoginPage, fullscreenDialog: true),
     MaterialRoute<dynamic>(page: WelcomeScreen, initial: true),
-    MaterialRoute<dynamic>(page: CounterPage, fullscreenDialog: true),
-    MaterialRoute<dynamic>(page: LoginPage),
   ],
 )
 class $Router {}

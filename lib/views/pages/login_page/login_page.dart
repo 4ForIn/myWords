@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -73,7 +74,9 @@ class LoginPage extends StatelessWidget {
               ),
 
               BuildBtn(
-                onPressed: () {},
+                onPressed: () {
+                  ExtendedNavigator.of(context).push(AppStrings.homeScr);
+                },
                 text: vm.loginPageState == AppStrings.signUpScr
                     ? AppStrings.signUpCapital
                     : AppStrings.loginCapital,

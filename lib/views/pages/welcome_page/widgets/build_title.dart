@@ -16,7 +16,7 @@ class BuildTitleWidget extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: FittedBox(
           child: Text(
-            AppStrings.homeScreenReady,
+            AppStrings.readyTo,
             style: Theme.of(context).textTheme.subtitle2.copyWith(
                 fontSize: 3.2 * SizeConfig.heightMultiplier), //fontSize: 22
 

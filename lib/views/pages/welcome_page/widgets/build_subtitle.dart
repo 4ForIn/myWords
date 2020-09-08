@@ -17,7 +17,7 @@ class BuildSubtitleWidget extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(bottom: 1 * SizeConfig.heightMultiplier),
           child: Text(
-            AppStrings.welcomeScreenSubtitle,
+            AppStrings.canLearnMore,
             style: Theme.of(context).textTheme.subtitle2,
             textAlign: TextAlign.center,
           ),

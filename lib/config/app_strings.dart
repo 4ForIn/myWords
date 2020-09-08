@@ -2,10 +2,10 @@ class AppStrings {
   // private constructor:
   AppStrings._();
 
-  static const String homeScreenHi = 'Hello';
-  static const String homeScreenReady = 'Are You ready to learn new words?';
+  static const String hi = 'Hi';
+  static const String readyTo = 'Are You ready to learn new words?';
 
-  static const String welcomeScreenSubtitle = '''
+  static const String canLearnMore = '''
   Anyone can learn more,
   Here you can make your own dictionary''';
 
@@ -13,7 +13,7 @@ class AppStrings {
 
   static const String addNewWordTitle = '''
   Add a new word to Your dictionary,
-  You can select also a category of the word''';
+  You can also select a category of the word''';
 
   static const String numberOfWords = 'The number of Your words:';
   static const String newWordCategory = 'Type the category of the word: ';
@@ -32,7 +32,7 @@ class AppStrings {
   static const String english = 'English';
   static const String polish = 'Polish';
   static const String turkish = 'Turkish';
-  static const String serch = 'Search';
+  static const String search = 'Search';
   static const String yourWords = 'Your words';
   static const String wordsTab = 'My words';
   static const String exerciseTab = 'My exercises';
@@ -47,11 +47,11 @@ class AppStrings {
   static const String lightMode = 'Light mode';
   static const String darkMode = 'Dark mode';
   static const String welcomeScr = '/';
+  static const String newWordScr = '/add-word-page';
   static const String homeScr = '/home-page';
   static const String logInScr = '/login-page';
   static const String resetScr = '/reset-page';
   static const String signUpScr = '/signup-page';
-  static const String addNewScr = '/addNew';
 
   //static const String forgotPass = 'Forgot Password?';
   //static const String signUptxt = 'SIGN UP';

@@ -3,11 +3,17 @@ import 'package:my_words/redux/actions/actions.dart';
 import 'package:redux/redux.dart';
 
 Reducer<AppSettings> settingsReducer = combineReducers<AppSettings>([
+  TypedReducer<AppSettings, CheckForLoggedInUserAction>(_checkUser),
   TypedReducer<AppSettings, FakeAction>(_darkModeOn),
   TypedReducer<AppSettings, Fake2Action>(_darkModeOff),
   TypedReducer<AppSettings, SetLoggedUserAction>(_thereIsLoggedUser),
   TypedReducer<AppSettings, NoLoggedUserAction>(_thereIsNoLoggedUser),
 ]);
+
+AppSettings _checkUser(
+    AppSettings appSettings, CheckForLoggedInUserAction action) {
+  return appSettings.copyWith(isDarkMode: 'true');
+}
 
 AppSettings _darkModeOn(AppSettings appSettings, FakeAction action) {
   return appSettings.copyWith(isDarkMode: 'true');

@@ -10,9 +10,11 @@ import 'package:redux/redux.dart';
 class TopContainerLandscape extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ViewModel>(
-      converter: (Store<AppState> store) => _ViewModel.fromStore(store),
-      builder: (BuildContext context, _ViewModel vm) => FractionallySizedBox(
+    return StoreConnector<AppState, _LandscapeTopViewModel>(
+      converter: (Store<AppState> store) =>
+          _LandscapeTopViewModel.fromStore(store),
+      builder: (BuildContext context, _LandscapeTopViewModel vm) =>
+          FractionallySizedBox(
         heightFactor: 0.78,
         //without this alignment it wont start from very top
         alignment: Alignment.topCenter,
@@ -89,7 +91,7 @@ class TopContainerLandscape extends StatelessWidget {
           horizontal: 1 * SizeConfig.heightMultiplier,
         ),
         child: Text(
-          AppStrings.homeScreenHi,
+          AppStrings.hi,
           style: Theme.of(context).textTheme.headline4,
         ),
       ),
@@ -99,16 +101,16 @@ class TopContainerLandscape extends StatelessWidget {
 
 typedef ViewModelFn = Function();
 
-class _ViewModel {
+class _LandscapeTopViewModel {
   final ViewModelFn getDataFomDb;
 
-  _ViewModel({
+  _LandscapeTopViewModel({
     this.getDataFomDb,
   });
 
   // ignore: prefer_constructors_over_static_methods
-  static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(
+  static _LandscapeTopViewModel fromStore(Store<AppState> store) {
+    return _LandscapeTopViewModel(
       getDataFomDb: () => store.dispatch(FakeAction),
     );
   }

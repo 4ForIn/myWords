@@ -40,10 +40,10 @@ class ProfileImage extends StatelessWidget {
   }
 }
 
-typedef ViewModelFn = Function();
+typedef ViewModelFn2 = Function();
 
 class _ProfileImgViewModel {
-  final ViewModelFn updatePhotoFn;
+  final ViewModelFn2 updatePhotoFn;
   final String photoUrl;
 
   _ProfileImgViewModel({

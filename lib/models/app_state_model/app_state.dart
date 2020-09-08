@@ -19,17 +19,14 @@ class AppState {
 
   AppState.initialState()
       : currentUser = const User(),
-        wordsList = [const WordModel()], // dummysWords
+        wordsList = [], // dummysWords
         appSettings = const AppSettings(isDarkMode: 'false'),
         homePageState = const HomePageState(
           selectLanguageRadioListGrVal: AppStrings.en,
           selectedTab: AppStrings.wordsTab,
         ),
         loginPageState = const LoginPageState(
-          email: '',
           emailLabel: 'Email address',
-          name: '',
-          password: '',
           passwordLabel: 'Password',
           pageState: AppStrings.logInScr,
           isObscured: true,

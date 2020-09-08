@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:my_words/config/config.dart';
-import 'package:my_words/views/pages/pages.dart';
+import 'package:my_words/models/models.dart';
+import 'package:my_words/redux/actions/actions.dart';
 import 'package:my_words/views/pages/welcome_page/widgets/welcome_page_widgets.dart';
 import 'package:my_words/views/widgets/menus/popup_menu_button_widget.dart';
 
@@ -38,6 +41,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    StoreProvider.of<AppState>(context).dispatch(checkForLoggedInUser());
     return Scaffold(
       appBar: buildAppBar(context),
       body: SafeArea(
@@ -72,13 +76,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppTheme.selectedTabBackgroundColor,
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute<WidgetBuilder>(
-            //MaterialPageRoute<Null>
-            builder: (BuildContext context) {
-              return CounterPage();
-            },
-            fullscreenDialog: true,
-          ));
+          ExtendedNavigator.of(context).push(AppStrings.newWordScr);
         },
         child: ClipOval(
           child: Image.asset(

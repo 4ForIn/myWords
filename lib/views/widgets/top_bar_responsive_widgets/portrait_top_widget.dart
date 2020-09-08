@@ -10,9 +10,11 @@ import 'package:redux/redux.dart';
 class TopContainerPortrait extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, _ViewModel>(
-      converter: (Store<AppState> store) => _ViewModel.fromStore(store),
-      builder: (BuildContext context, _ViewModel vm) => FractionallySizedBox(
+    return StoreConnector<AppState, _PortraitTopViewModel>(
+      converter: (Store<AppState> store) =>
+          _PortraitTopViewModel.fromStore(store),
+      builder: (BuildContext context, _PortraitTopViewModel vm) =>
+          FractionallySizedBox(
         heightFactor: 0.75,
         alignment: Alignment.topCenter,
         child: Container(
@@ -76,7 +78,7 @@ class TopContainerPortrait extends StatelessWidget {
           horizontal: 1 * SizeConfig.heightMultiplier,
         ),
         child: Text(
-          AppStrings.homeScreenHi,
+          AppStrings.hi,
           style: Theme.of(context).textTheme.headline4,
         ),
       ),
@@ -85,38 +87,22 @@ class TopContainerPortrait extends StatelessWidget {
 
   ///------------------------------------------------------------------
 
-  /* Expanded buildSearchField() {
-    return Expanded(
-      flex: 7,
-      child: Container(
-        padding:
-            EdgeInsets.symmetric(horizontal: 2 * SizeConfig.heightMultiplier),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(24),
-          ),
-        ),
-        child: const SearchFieldWidget(),
-      ),
-    );
-  } */
 }
 
-typedef ViewModelFn = Function();
+//typedef ViewModelFn1 = Function();
 
-class _ViewModel {
-  final ViewModelFn getDataFomDb;
-  final ViewModelFn logOut;
+class _PortraitTopViewModel {
+  final Function getDataFomDb;
+  final Function logOut;
 
-  _ViewModel({
+  _PortraitTopViewModel({
     this.getDataFomDb,
     this.logOut,
   });
 
   // ignore: prefer_constructors_over_static_methods
-  static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(
+  static _PortraitTopViewModel fromStore(Store<AppState> store) {
+    return _PortraitTopViewModel(
       getDataFomDb: () => store.dispatch(FakeAction),
       logOut: () => store.dispatch(FakeAction),
     );
